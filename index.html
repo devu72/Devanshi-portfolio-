@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devanshi Bhatt | Full-Stack Prompt Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050511;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-color: #f1f5f9;
+            --accent-color: #00f7ff; /* Neon Blue */
+            --accent-glow: rgba(0, 247, 255, 0.5);
+            --secondary-color: #0066ff;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- BACKGROUND --- */
+        .bg-animation {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #0a0a20 0%, #000 100%);
+        }
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: moveOrb 20s infinite alternate;
+        }
+        .orb-1 { width: 300px; height: 300px; background: var(--accent-color); top: 10%; left: 10%; }
+        .orb-2 { width: 400px; height: 400px; background: var(--secondary-color); bottom: 10%; right: 10%; }
+
+        @keyframes moveOrb {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- NAV & HEADER --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .nav-name { font-weight: 700; font-size: 1.5rem; color: white; }
+        .nav-links a { color: #ccc; text-decoration: none; margin-left: 20px; font-weight: 600; }
+        .nav-links a:hover { color: var(--accent-color); }
+
+        header { text-align: center; padding: 100px 0 60px; }
+        h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            background: linear-gradient(to right, #fff, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px var(--accent-glow);
+        }
+        .role {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: var(--accent-color);
+            color: black;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* --- SERVICES --- */
+        .section-title {
+            font-size: 2rem;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+            margin: 60px 0 30px;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .card h3 { color: var(--accent-color); margin-top: 0; }
+        
+        .service-list ul { list-style: none; padding: 0; }
+        .service-list li { margin-bottom: 10px; color: #ddd; }
+        .service-list li::before { content: "▹ "; color: var(--accent-color); }
+
+        /* --- PROJECTS (With Your Images) --- */
+        .project {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .project-title { font-size: 1.5rem; color: white; margin-bottom: 20px; font-weight: bold; }
+        
+        .comparison-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .image-box {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        .image-box img {
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid #333;
+        }
+        .label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: black;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .prompt-box {
+            margin-top: 20px;
+            background: #111;
+            padding: 15px;
+            border-left: 4px solid var(--accent-color);
+            font-family: monospace;
+            color: #a5f3fc;
+        }
+
+        /* --- FORM --- */
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid #444;
+            color: white;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: var(--accent-color);
+            color: black;
+            border: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .comparison-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <div class="container">
+        <nav>
+            <div class="nav-name">DEVANSHI BHATT</div>
+            <div class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#work">Work</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+
+        <header>
+            <h1>Devanshi Bhatt</h1>
+            <div class="role">Full-Stack Prompt Engineer</div>
+            <p style="color: #ccc; margin-top: 20px;">Visual Design • Editorial Strategy • Data Logic</p>
+            <a href="#contact" class="btn">Hire Me</a>
+            <div style="margin-top: 20px;">
+                <a href="https://www.linkedin.com/in/devanshi-bhatt-0aa066375?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" style="color:white; text-decoration:underline;">View LinkedIn Profile</a>
+            </div>
+        </header>
+
+        <div id="services">
+            <h2 class="section-title">Core Services</h2>
+            <div class="grid-3">
+                <div class="card service-list">
+                    <h3>Visuals</h3>
+                    <ul>
+                        <li>Ebook Cover Design (KDP)</li>
+                        <li>Product Packaging 3D</li>
+                        <li>Social Media Ads</li>
+                        <li>Brand Identity</li>
+                    </ul>
+                </div>
+                <div class="card service-list">
+                    <h3>Writing</h3>
+                    <ul>
+                        <li>Ebook Ghostwriting</li>
+                        <li>SEO Blog Articles</li>
+                        <li>Sales Copywriting</li>
+                        <li>Chatbot Personas</li>
+                    </ul>
+                </div>
+                <div class="card service-list">
+                    <h3>Data Logic</h3>
+                    <ul>
+                        <li>Unstructured Data to JSON</li>
+                        <li>Prompt Auditing</li>
+                        <li>API Engineering</li>
+                        <li>Workflow Automation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="work">
+            <h2 class="section-title">Selected Works</h2>
+
+            <div class="project">
+                <div class="project-title">PROJECT: Non-Fiction Cover Design</div>
+                <div class="comparison-container">
+                    <div class="image-box">
+                        <span class="label">FINAL AI RESULT</span>
+                        <img src="https://i.ibb.co/LdQ8v0F/1000227422.png" alt="Self Love Book Cover">
+                    </div>
+                </div>
+                <div class="prompt-box">
+                    <strong>MY PROMPT:</strong> "Soft minimalist book cover, warm sunlight filtering through sheer curtains, a woman holding a cup of tea by a window, cozy atmosphere, pastel peach and cream color palette, typography 'Self Love Tips' in elegant serif font, photorealistic, 8k resolution."
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-title">PROJECT: Fantasy Fiction Cover</div>
+                <div class="comparison-container">
+                    <div class="image-box">
+                        <span class="label">FINAL AI RESULT</span>
+                        <img src="https://i.ibb.co/3yq0Q1q/1000227423.png" alt="Forever to Never Book Cover">
+                    </div>
+                </div>
+                <div class="prompt-box">
+                    <strong>MY PROMPT:</strong> "Epic fantasy romance book cover, two figures reaching out to each other across a magical glowing portal ring, starry night sky, purple and blue cosmic nebula background, ancient runes, cinematic lighting, detailed digital art style."
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-title">PROJECT: Business Success Cover</div>
+                <div class="comparison-container">
+                    <div class="image-box">
+                        <span class="label">FINAL AI RESULT</span>
+                        <img src="https://i.ibb.co/qYP2H1n/1000227421.png" alt="Be Unstoppable Book Cover">
+                    </div>
+                </div>
+                <div class="prompt-box">
+                    <strong>MY PROMPT:</strong> "Motivational book cover, silhouette of a man standing on a mountain peak holding glowing energy, golden light rays, dark navy background, bold sans-serif typography 'Be Unstoppable', themes of success and discipline, 3D render style."
+                </div>
+            </div>
+
+        </div>
+
+        <div id="contact">
+            <h2 class="section-title">Get In Touch</h2>
+            <form action="https://formspree.io/f/YOUR_NEW_FORM_ID_HERE" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            <p style="text-align: center; color: #888; margin-top: 10px;">
+                (Note: Please update the form ID in the code to make this work!)
+            </p>
+        </div>
+
+        <footer style="text-align: center; padding: 50px 0; color: #666; font-size: 0.9rem;">
+            &copy; 2026 Devanshi Bhatt. All Rights Reserved.
+        </footer>
+
+    </div>
+
+</body>
+</html>
